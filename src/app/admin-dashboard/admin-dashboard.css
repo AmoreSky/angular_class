@@ -1,0 +1,10 @@
+.layout{ display:flex; gap:20px }
+.content{ flex:1 }
+.topbar{ display:flex; justify-content:space-between; align-items:center }
+.grid{ display:flex; gap:12px; margin:12px 0 }
+.kpi.card{ flex:1; padding:14px; background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(19,35,47,0.06) }
+.row{ display:flex; gap:18px }
+.left{ flex:2 }
+.right{ flex:1 }
+.chart-placeholder{ height:200px; border-radius:8px; background:linear-gradient(180deg,#fbfdff,#f3f7f9); display:flex; align-items:center; justify-content:center; color:#7b8b93 }
+.approval{ display:flex; justify-content:space-between; align-items:center; padding:8px; border-bottom:1px solid rgba(33,48,66,0.03) }

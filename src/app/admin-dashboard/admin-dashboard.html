@@ -1,0 +1,70 @@
+<div class="layout">
+    <app-side-bar [userName]="'Admin User'" [userRole]="'Admin'"></app-side-bar>
+    <div class="content">
+        <div class="topbar">
+            <h2>Welcome, Admin!</h2>
+            <input class="form-control search" placeholder="Search...">
+        </div>
+
+
+        <div class="grid">
+            <div class="kpi card">
+                <div class="label">Total Users</div>
+                <div class="value">{{totalUsers}}</div>
+            </div>
+            <div class="kpi card">
+                <div class="label">Pending Jobs</div>
+                <div class="value">{{pendingJobs}}</div>
+            </div>
+            <div class="kpi card">
+                <div class="label">Total Revenue</div>
+                <div class="value">${{totalRevenue}}</div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="left">
+                <section class="card">
+                    <h4>Platform Earnings</h4>
+                    <div class="chart-placeholder">[chart]</div>
+                </section>
+
+
+                <section class="card mt">
+                    <h4>Recently Joined</h4>
+                    <div class="avatars">
+                        <img src="/assets/avatar-placeholder.png" alt="u1">
+                        <img src="/assets/avatar-placeholder.png" alt="u2">
+                        <img src="/assets/avatar-placeholder.png" alt="u3">
+                    </div>
+                </section>
+            </div>
+            <aside class="right">
+                <section class="card">
+                    <h4>Pending Approvals</h4>
+                    <div *ngFor="let p of pendingApprovals" class="approval">
+                        <div>
+                            <div class="name">{{p.name}}</div>
+                            <div class="muted">{{p.role}}</div>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-sm btn-outline-success" (click)="approve(p)">Approve</button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="reject(p)">Reject</button>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="card mt">
+                    <h4>Recent Disputes</h4>
+                    <div class="muted">New dispute: Client vs Artisan — view in Disputes</div>
+                    <div class="mt-2 text-end"><button class="btn btn-sm btn-outline-primary">View Details</button>
+                    </div>
+                </section>
+            </aside>
+        </div>
+
+
+    </div>
+</div>

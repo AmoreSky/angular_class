@@ -1,0 +1,27 @@
+<div class="sidebar">
+    <div class="brand"><span class="logo"></span>
+        <h4>Hirein</h4>
+    </div>
+
+
+    <div class="profile">
+        <div class="avatar"><img src="/assets/avatar-placeholder.png" alt="user"></div>
+        <div class="meta">
+            <div class="name">{{userName}}</div>
+            <div class="role">{{userRole}}</div>
+        </div>
+    </div>
+
+
+    <nav class="nav">
+        <a (click)="go('dashboard')" [class.active]="active==='dashboard'">Dashboard</a>
+        <a (click)="go('job-board')" [class.active]="active==='job-board'">Job Board</a>
+        <a (click)="go('active-jobs')" [class.active]="active==='active-jobs'">Active Jobs</a>
+        <a (click)="go('profile')" [class.active]="active==='profile'">Profile & Settings</a>
+        <a (click)="go('payouts')" [class.active]="active==='payouts'">Payouts</a>
+        <a (click)="go('help')" [class.active]="active==='help'">Help Center</a>
+    </nav>
+
+
+    <div class="footer">© 2024 Hirein</div>
+</div>

@@ -1,0 +1,16 @@
+.layout{ display:flex; gap:20px }
+.content{ flex:1 }
+.topbar{ display:flex; justify-content:space-between; align-items:center }
+.kpis{ display:flex; gap:12px; margin:18px 0 }
+.kpi.card{ padding:14px; border-radius:10px; background:#fff; box-shadow:0 6px 18px rgba(19,35,47,0.06) }
+.kpi .value{ font-weight:700; font-size:1.4rem }
+.row{ display:flex; gap:18px }
+.col-left{ flex:2 }
+.col-right{ flex:1 }
+.card{ background:#fff; padding:14px; border-radius:12px; box-shadow:0 6px 18px rgba(19,35,47,0.06); margin-bottom:12px }
+.job{ display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:8px; border:1px solid rgba(33,48,66,0.03); margin-bottom:8px }
+.badge{ background:#e6fbf8; color:#0d6d5a; padding:6px 10px; border-radius:999px }
+.badge.pending{ background:#fff3cd; color:#7a5b00 }
+.progress{ height:10px; background:#f1f5f7; border-radius:8px; overflow:hidden }
+.progress .bar{ height:100%; background:#08b3a8 }
+.links{ display:flex; flex-direction:column; gap:8px }

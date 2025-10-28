@@ -1,0 +1,37 @@
+<div class="layout">
+    <app-side-bar [userName]="'Client Name'" [userRole]="'Client'"></app-side-bar>
+    <div class="content">
+        <div class="card header-card">
+            <div class="left">
+                <h3>Your Active Projects</h3>
+                <p class="muted">Manage your jobs and message artisans</p>
+            </div>
+            <div class="right"><button class="btn btn-primary">Post a Job</button></div>
+        </div>
+
+        <div class="card">
+            <div *ngFor="let p of activeProjects" class="project">
+                <div>
+                    <div class="title">{{p.title}} <span class="muted">• {{p.subtitle}}</span></div>
+                    <div class="muted">Status: {{p.status}}</div>
+                </div>
+                <div class="actions">
+                    <span class="badge status">{{p.status}}</span>
+                    <button class="btn btn-sm btn-outline-primary" (click)="messageArtisan(p)">Message Artisan</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt">
+            <h4>Your Favorite Artisans</h4>
+            <div class="avatars">
+                <div class="a" *ngFor="let f of favorites"> <img src="/assets/avatar-placeholder.png" alt="f">
+                    <div class="name">{{f}}</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

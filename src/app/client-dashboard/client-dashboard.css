@@ -1,0 +1,9 @@
+.layout{ display:flex; gap:20px }
+.content{ flex:1 }
+.header-card{ display:flex; justify-content:space-between; align-items:center; padding:14px; background:#fff; border-radius:12px }
+.card{ background:#fff; padding:14px; border-radius:12px; box-shadow:0 6px 18px rgba(19,35,47,0.06); margin-top:12px }
+.project{ display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:8px; border:1px solid rgba(33,48,66,0.03); margin-bottom:10px }
+.badge.status{ background:#e9f7ef; color:#0b664b; padding:6px 10px; border-radius:999px }
+.avatars{ display:flex; gap:10px; align-items:center }
+.avatars .a{ text-align:center }
+.avatars img{ width:48px; height:48px; border-radius:50% }

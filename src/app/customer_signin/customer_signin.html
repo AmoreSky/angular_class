@@ -1,0 +1,29 @@
+<div id="body" class="pt-5">
+    <div class="mx-auto p-4 shadow rounded border border-1 col-11 col-lg-6 bg-light">
+        <h2 class="text-center fw-bold text-success">Login</h2>
+        <form action="" [formGroup]="signinForm">
+             <div class="form-group mb-2">
+                <label for="" class="fw-semibold mb-1 fs-5 text-success">Email</label>
+                <input type="email" class="form-control" formControlName="email" [class.is-invalid]="signinForm.get('email')?.errors && signinForm.get('email')?.touched" [class.is-valid]="!signinForm.get('email')?.errors && signinForm.get('email')?. touched">
+                  @if (signinForm.get('email')?. errors && signinForm.get('email')?. dirty){
+                    <span class="text-danger" *ngIf="signinForm.get('email')?.hasError('required')">Email cannot be empty</span>
+                    <span class="text-danger" *ngIf="signinForm.get('email')?.hasError('email')">Email must be a valid email address</span>
+                }
+            </div>
+            <div class="form-group mb-2">
+                <label for="" class="fw-semibold text-success mb-1 fs-5">Password</label>
+                <input type="password" class="form-control" formControlName="password" [class.is-invalid]="signinForm.get('password')?.errors && signinForm.get('password')?.touched" [class.is-valid]="!signinForm.get('password')?.errors && signinForm.get('password')?. touched">
+                  @if (signinForm.get('password')?. errors && signinForm.get('password')?. dirty){
+                    <span class="text-danger" *ngIf="signinForm.get('password')?.hasError('required')">Password cannot be empty</span>
+                    <span class="text-danger" *ngIf="signinForm.get('password')?.hasError('pattern')">Password must contain at least one uppercase, one lowercase, one number, one special character and must not be less than 8 characters</span>
+                }
+            </div>
+            <div class="form-group mb-2">
+                <button class="btn btn-success w-100">Login</button>
+            </div>
+        </form>
+        <div class="text-center my-2">
+            <p>Don't have an account? <a routerLink="/signup">Signup</a></p>
+        </div>
+    </div>
+</div>

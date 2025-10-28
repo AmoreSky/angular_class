@@ -1,0 +1,88 @@
+<div class="layout">
+    <app-side-bar [userName]="'Jane Smith'" [userRole]="'Tailor'"></app-side-bar>
+
+    <div class="content">
+        <div class="topbar">
+            <h2>Welcome, Jane!</h2>
+            <input class="form-control search" placeholder="Search...">
+        </div>
+
+
+        <div class="kpis">
+            <div class="kpi card">
+                <div class="label">My Rating</div>
+                <div class="value">{{rating}}</div>
+                <div class="muted">({{reviews}} reviews)</div>
+            </div>
+            <div class="kpi card">
+                <div class="label">Total Earnings</div>
+                <div class="value">${{earnings}}</div>
+            </div>
+            <div class="kpi card">
+                <div class="label">Completed Jobs</div>
+                <div class="value">{{completedJobs}}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-left">
+                <section class="card">
+                    <h3>New Job Offers</h3>
+                    <div *ngFor="let job of newJobs" class="job">
+                        <div>
+                            <div class="title">{{job.title}}</div>
+                            <div class="meta">Customer: {{job.customer}} • {{job.location}} • Budget ${{job.budget}}
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" (click)="apply(job)">Apply</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card mt">
+                    <h3>My Active Projects</h3>
+                    <div *ngFor="let p of activeProjects" class="job">
+                        <div>
+                            <div class="title">Client: {{p.client}} • {{p.title}}</div>
+                            <div class="meta">Status: {{p.status}}</div>
+                        </div>
+                        <div class="actions">
+                            <ng-container *ngIf="p.status==='In Progress'">
+                                <span class="badge">In Progress</span>
+                                <button class="btn btn-sm btn-outline-primary" (click)="messageClient(p)">Message
+                                    Client</button>
+                            </ng-container>
+                            <ng-container *ngIf="p.status==='Payment Pending'">
+                                <span class="badge pending">Payment Pending</span>
+                                <button class="btn btn-sm btn-success" (click)="requestPayout(p)">Request
+                                    Payout</button>
+                            </ng-container>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="col-right">
+                <section class="card">
+                    <h4>Profile Strength</h4>
+                    <p class="muted">Complete your profile to get more jobs</p>
+                    <div class="progress">
+                        <div class="bar" style="width:65%"></div>
+                    </div>
+                    <button class="btn btn-primary mt-2">Complete Profile</button>
+                </section>
+
+
+                <section class="card mt">
+                    <h4>Quick Links</h4>
+                    <div class="links">
+                        <button class="btn btn-outline-secondary">Payouts</button>
+                        <button class="btn btn-outline-secondary">Messages</button>
+                        <button class="btn btn-outline-secondary">Settings</button>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
