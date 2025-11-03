@@ -6,6 +6,8 @@ import { HOMEPAGE } from './homepage/homepage';
 import { ARTISANDASHBOARD } from './artisan-dashboard/artisan-dashboard';
 import { CLIENTDASHBOARD } from './client-dashboard/client-dashboard';
 import { ADMINDASHBOARD } from './admin-dashboard/admin-dashboard';
+import { ArtisanSignup } from './artisan-signup/artisan-signup';
+import { ArtisanSignin } from './artisan-signin/artisan-signin';
 
 export const routes: Routes = [
     { path: '', component: HOMEPAGE },
@@ -13,5 +15,7 @@ export const routes: Routes = [
     { path: 'customer_signin', component: CUSTOMERSIGNIN },
     { path: 'artisan-dashboard', component: ARTISANDASHBOARD },
     { path: 'client-dashboard', component: CLIENTDASHBOARD },
-    { path: 'admin-dashboard', component: ADMINDASHBOARD }
+    { path: 'admin-dashboard', component: ADMINDASHBOARD },
+    {path: 'artisan-signup', component: ArtisanSignup},
+    {path: 'artisan-signin', component: ArtisanSignin}
 ];

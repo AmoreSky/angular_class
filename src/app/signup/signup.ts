@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router } from "@angular/router";
 //import * as AOS from 'aos';
@@ -11,11 +11,7 @@ import { RouterLink, Router } from "@angular/router";
   templateUrl: './signup.html',
   styleUrl: './signup.css'
 })
-export class Signup implements OnInit {
-  ngOnInit(): void {
-    this.users = localStorage['users'] ? JSON.parse(localStorage['users']) : []
-  }
-
+export class Signup {
   private http = inject(HttpClient)
   private builder = inject(FormBuilder)
   private router = inject(Router)
@@ -51,7 +47,7 @@ export class Signup implements OnInit {
           console.log(response)
           if (response.status === 200) {
             console.log('I will go to Sign in');
-            this.router.navigate(['/signin'])
+            this.router.navigate(['/customer_signin'])
           } else {
             this.errorMessage = response.message || 'Registration failed. Please try again.';
             this.showError = true;
@@ -62,7 +58,8 @@ export class Signup implements OnInit {
           this.showError = true;
           console.error('Error:', error);
 
-  }})
+        }
+      })
 
   }
 

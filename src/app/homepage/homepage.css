@@ -1,11 +1,366 @@
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
+/* Navbar */
+.navbar {
+    position: relative;
+    z-index: 1030;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-nav .nav-item {
+    margin: 0 1rem;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 0;
+}
+
+/* Navbar collapse overlay only on mobile */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #198754;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Hero Section */
 #body {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
         url('/assets/home-page-background.jpg');
     background-position: center;
-    background-size: contain;
-    height: 90vh;
+    background-size: cover;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-hero {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    border-width: 2px;
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Popular Categories Section */
+.popular-categories {
+    background-color: #ffffff;
+}
+
+.category-card {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15);
+    background-color: #e8f5e9;
+}
+
+.category-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+/* How It Works Section */
+.how-it-works {
+    background-color: #f8f9fa;
+}
+
+.work-step {
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.step-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.work-step h5 {
+    color: #212529;
+    font-size: 1.1rem;
+}
+
+.work-step p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Why Trust Us Section */
+.why-trust-us {
+    background-color: #ffffff;
+}
+
+.trust-card {
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.trust-card:hover {
+    box-shadow: 0 4px 16px rgba(25, 135, 84, 0.2);
+    transform: translateY(-3px);
+}
+
+.trust-icon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.trust-card h5 {
+    color: #212529;
+    font-size: 1.15rem;
+}
+
+.trust-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* Featured Artisans Section */
+.featured-artisans {
+    background-color: #f8f9fa;
+}
+
+.artisan-list {
+    padding: 1rem;
+}
+
+.artisan-item {
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.artisan-item:hover {
+    border-color: #198754;
+    box-shadow: 0 2px 8px rgba(25, 135, 84, 0.15);
+}
+
+.artisan-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #dee2e6;
+}
+
+.artisan-info h6 {
+    color: #212529;
+}
+
+.artisan-cta h4 {
+    color: #212529;
+    line-height: 1.5;
+}
+
+.artisan-cta .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #198754;
+}
+
+.footer h5 {
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.social-links a {
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding-left: 5px;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact svg {
+    flex-shrink: 0;
+}
+
+.footer hr {
+    opacity: 0.3;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.footer .row:last-child a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer .row:last-child a:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        padding-top: 1rem;
+    }
+
+    .navbar-nav {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .btn-hero {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.95rem;
+        min-width: 160px;
+    }
+
+    .category-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .work-step h5 {
+        font-size: 1rem;
+    }
+
+    .trust-card h5 {
+        font-size: 1rem;
+    }
+
+    .artisan-cta h4 {
+        font-size: 1.25rem;
+    }
+
+    .footer h5 {
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+
+    .footer .col-md-6 {
+        text-align: center !important;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .btn-hero {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .category-card h6 {
+        font-size: 0.9rem;
+    }
+
+    .work-step p,
+    .trust-card p {
+        font-size: 0.85rem;
+    }
+
+    .social-links a {
+        margin-right: 1rem !important;
+    }
 }
