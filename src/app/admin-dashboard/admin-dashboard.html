@@ -1,70 +1,132 @@
-<div class="layout">
-    <app-side-bar [userName]="'Admin User'" [userRole]="'Admin'"></app-side-bar>
-    <div class="content">
-        <div class="topbar">
-            <h2>Welcome, Admin!</h2>
-            <input class="form-control search" placeholder="Search...">
+<div class="dashboard-layout">
+    <app-side-bar [userName]="'Admin User'" [userRole]="'Administrator'" [navItems]="adminNavItems">
+    </app-side-bar>
+
+    <div class="main-content">
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" (click)="toggleMenu()">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h2 class="welcome-text">Welcome, Admin!</h2>
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                <input type="text" class="form-control" placeholder="Search...">
+            </div>
         </div>
 
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-label">Total Users</div>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">{{totalUsers | number}}</div>
+                    <span class="badge badge-success">+321</span>
+                </div>
+            </div>
 
-        <div class="grid">
-            <div class="kpi card">
-                <div class="label">Total Users</div>
-                <div class="value">{{totalUsers}}</div>
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-label">Pending Jobs</div>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">{{pendingJobs}}</div>
+                    <span class="badge badge-appeal">Appeal</span>
+                </div>
             </div>
-            <div class="kpi card">
-                <div class="label">Pending Jobs</div>
-                <div class="value">{{pendingJobs}}</div>
-            </div>
-            <div class="kpi card">
-                <div class="label">Total Revenue</div>
-                <div class="value">${{totalRevenue}}</div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-label">Total Revenue</div>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">${{totalRevenue | number}}</div>
+                    <span class="badge badge-approve">Approve</span>
+                </div>
             </div>
         </div>
 
-
-        <div class="row">
-            <div class="left">
-                <section class="card">
-                    <h4>Platform Earnings</h4>
-                    <div class="chart-placeholder">[chart]</div>
-                </section>
-
-
-                <section class="card mt">
-                    <h4>Recently Joined</h4>
-                    <div class="avatars">
-                        <img src="/assets/avatar-placeholder.png" alt="u1">
-                        <img src="/assets/avatar-placeholder.png" alt="u2">
-                        <img src="/assets/avatar-placeholder.png" alt="u3">
-                    </div>
-                </section>
-            </div>
-            <aside class="right">
-                <section class="card">
-                    <h4>Pending Approvals</h4>
-                    <div *ngFor="let p of pendingApprovals" class="approval">
-                        <div>
-                            <div class="name">{{p.name}}</div>
-                            <div class="muted">{{p.role}}</div>
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Platform Earnings Chart -->
+                <div class="card chart-card">
+                    <h4 class="card-title">Platform Earnings</h4>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <svg class="chart-icon" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+                            </svg>
+                            <p class="text-muted mt-2">Chart visualization</p>
                         </div>
-                        <div class="actions">
-                            <button class="btn btn-sm btn-outline-success" (click)="approve(p)">Approve</button>
-                            <button class="btn btn-sm btn-outline-danger" (click)="reject(p)">Reject</button>
+                        <div class="chart-legend">
+                            <span class="legend-item">
+                                <span class="legend-dot legend-last-month"></span> Last Month
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-dot legend-this-month"></span> This Month
+                            </span>
                         </div>
                     </div>
-                </section>
+                </div>
 
-
-                <section class="card mt">
-                    <h4>Recent Disputes</h4>
-                    <div class="muted">New dispute: Client vs Artisan — view in Disputes</div>
-                    <div class="mt-2 text-end"><button class="btn btn-sm btn-outline-primary">View Details</button>
+                <!-- Recently Joined -->
+                <div class="card recently-joined-card">
+                    <h4 class="card-title">Recently Joined</h4>
+                    <div class="user-avatars">
+                        <div class="user-avatar" *ngFor="let user of recentlyJoined">
+                            <img [src]="user.avatar" [alt]="user.name">
+                            <div class="user-name">{{user.name}}</div>
+                        </div>
                     </div>
-                </section>
-            </aside>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Pending Approvals -->
+                <div class="card approvals-card">
+                    <h4 class="card-title">Pending Approvals</h4>
+                    <div class="approval-list">
+                        <div class="approval-item" *ngFor="let approval of pendingApprovals">
+                            <div class="approval-user">
+                                <img [src]="approval.avatar" [alt]="approval.name" class="approval-avatar">
+                                <div class="approval-info">
+                                    <div class="approval-name">{{approval.name}}</div>
+                                    <div class="approval-role">{{approval.role}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Disputes -->
+                <div class="card disputes-card">
+                    <h4 class="card-title">Recent Disputes</h4>
+                    <div class="dispute-item">
+                        <div class="dispute-user">
+                            <img [src]="recentDispute.avatar" [alt]="recentDispute.name" class="dispute-avatar">
+                            <div class="dispute-info">
+                                <div class="dispute-title">{{recentDispute.name}}</div>
+                                <div class="dispute-type">{{recentDispute.type}}</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm">View Details</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     </div>
 </div>

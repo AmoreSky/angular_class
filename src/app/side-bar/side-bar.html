@@ -1,27 +1,37 @@
-<div class="sidebar">
-    <div class="brand"><span class="logo"></span>
-        <h4>Hirein</h4>
-    </div>
+<div class="sidebar-wrapper" [class.sidebar-open]="isOpen">
+    <div class="sidebar-overlay" (click)="toggleSidebar()"></div>
 
-
-    <div class="profile">
-        <div class="avatar"><img src="/assets/avatar-placeholder.png" alt="user"></div>
-        <div class="meta">
-            <div class="name">{{userName}}</div>
-            <div class="role">{{userRole}}</div>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="logo">
+                    <img src="/assets/hiring.png" alt="Hirein Logo">
+                </span>
+                <h4>Hirein</h4>
+            </div>
+            <button class="sidebar-close" (click)="toggleSidebar()">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button>
         </div>
+
+        <div class="profile">
+            <div class="avatar"><img src="/assets/avatar-placeholder.png" alt="user"></div>
+            <div class="meta">
+                <div class="name">{{userName}}</div>
+                <div class="role">{{userRole}}</div>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a *ngFor="let item of navItems" (click)="go(item.id)" [class.active]="active===item.id">
+                <span class="nav-icon" [innerHTML]="item.icon"></span>
+                {{item.label}}
+            </a>
+        </nav>
+
+        <div class="footer">© 2025 Hirein</div>
     </div>
-
-
-    <nav class="nav">
-        <a (click)="go('dashboard')" [class.active]="active==='dashboard'">Dashboard</a>
-        <a (click)="go('job-board')" [class.active]="active==='job-board'">Job Board</a>
-        <a (click)="go('active-jobs')" [class.active]="active==='active-jobs'">Active Jobs</a>
-        <a (click)="go('profile')" [class.active]="active==='profile'">Profile & Settings</a>
-        <a (click)="go('payouts')" [class.active]="active==='payouts'">Payouts</a>
-        <a (click)="go('help')" [class.active]="active==='help'">Help Center</a>
-    </nav>
-
-
-    <div class="footer">© 2024 Hirein</div>
 </div>

@@ -1,9 +1,472 @@
-.layout{ display:flex; gap:20px }
-.content{ flex:1 }
-.header-card{ display:flex; justify-content:space-between; align-items:center; padding:14px; background:#fff; border-radius:12px }
-.card{ background:#fff; padding:14px; border-radius:12px; box-shadow:0 6px 18px rgba(19,35,47,0.06); margin-top:12px }
-.project{ display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:8px; border:1px solid rgba(33,48,66,0.03); margin-bottom:10px }
-.badge.status{ background:#e9f7ef; color:#0b664b; padding:6px 10px; border-radius:999px }
-.avatars{ display:flex; gap:10px; align-items:center }
-.avatars .a{ text-align:center }
-.avatars img{ width:48px; height:48px; border-radius:50% }
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin-left: 280px;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    background: linear-gradient(135deg, #198754, #146c43);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.4);
+}
+
+/* Top Bar */
+.top-bar {
+    background: linear-gradient(135deg, #198754, #146c43);
+    padding: 24px 30px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15);
+}
+
+.welcome-text {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.top-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-find-service {
+    background: white;
+    color: #198754;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-find-service:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #f8f9fa;
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #212529;
+    margin: 0 0 24px 0;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+/* Projects List */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover {
+    border-color: #198754;
+    background: #e9f7ef;
+}
+
+.project-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.project-icon.icon-plumbing {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.project-icon.icon-fashion {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+}
+
+.project-icon.icon-default {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+}
+
+.project-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 4px;
+}
+
+.project-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-badge.status-in-progress {
+    background: #d1f4e0;
+    color: #0b664b;
+}
+
+.status-badge.status-pending {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-badge.status-default {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.btn-message {
+    background: #198754;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-message:hover {
+    background: #146c43;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
+}
+
+/* Favorite Artisans */
+.artisans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+}
+
+.artisan-card {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.artisan-card:hover {
+    background: #e9f7ef;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.artisan-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 12px;
+    border: 3px solid #198754;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);
+}
+
+.artisan-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 4px;
+}
+
+.artisan-role {
+    font-size: 13px;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.artisan-rating {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+}
+
+.artisan-rating svg {
+    color: #d1d5db;
+    transition: color 0.2s ease;
+}
+
+.artisan-rating svg.filled {
+    color: #fbbf24;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .main-content {
+        padding: 80px 16px 16px;
+        margin-left: 0;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    .welcome-text {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .top-actions {
+        justify-content: center;
+    }
+
+    .project-item {
+        flex-wrap: wrap;
+        padding: 16px;
+    }
+
+    .project-status {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 8px;
+    }
+
+    .artisans-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 16px;
+    }
+
+    .artisan-card {
+        padding: 16px;
+    }
+
+    .artisan-avatar {
+        width: 64px;
+        height: 64px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 16px;
+    }
+
+    .welcome-text {
+        font-size: 18px;
+    }
+
+    .btn-find-service {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .project-item {
+        gap: 12px;
+    }
+
+    .project-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .project-title {
+        font-size: 15px;
+    }
+
+    .project-subtitle {
+        font-size: 13px;
+    }
+
+    .artisans-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 70px 12px 12px;
+    }
+
+    .top-bar {
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+
+    .top-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-find-service {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-icon {
+        width: 100%;
+    }
+
+    .card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .project-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-status {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .btn-message {
+        width: 100%;
+    }
+
+    .artisans-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .artisan-card {
+        padding: 12px;
+    }
+
+    .artisan-avatar {
+        width: 56px;
+        height: 56px;
+    }
+
+    .artisan-name {
+        font-size: 14px;
+    }
+
+    .artisan-role {
+        font-size: 12px;
+    }
+}

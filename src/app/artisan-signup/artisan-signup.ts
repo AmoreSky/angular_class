@@ -42,7 +42,7 @@ export class ArtisanSignup {
     this.users.push(this.signupForm.value)
     // this.users.find(user=>{user.email === this.signUpForm.value.email})
     // localStorage['users'] = JSON.stringify(this.users);
-    this.http.post('http://localhost/Hirein/auth/artisan-signup', this.signupForm.value)
+    this.http.post('http://localhost/Hirein/artisanAuth/artisan-signup', this.signupForm.value)
       .subscribe({
         next: (response: any) => {
           console.log(response)

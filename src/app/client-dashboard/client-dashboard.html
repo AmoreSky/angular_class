@@ -1,37 +1,97 @@
-<div class="layout">
-    <app-side-bar [userName]="'Client Name'" [userRole]="'Client'"></app-side-bar>
-    <div class="content">
-        <div class="card header-card">
-            <div class="left">
-                <h3>Your Active Projects</h3>
-                <p class="muted">Manage your jobs and message artisans</p>
+<div class="dashboard-layout">
+    <app-side-bar [userName]="'Client User'" [userRole]="'Client'" [navItems]="clientNavItems">
+    </app-side-bar>
+
+    <div class="main-content">
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" (click)="toggleMenu()">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h2 class="welcome-text">Welcome, {{user}}!</h2>
+            <div class="top-actions">
+                <button class="btn btn-find-service">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                    Find a Service
+                </button>
+                <button class="btn btn-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+                <button class="btn btn-success" (click)="logout()">Logout</button>
             </div>
-            <div class="right"><button class="btn btn-primary">Post a Job</button></div>
         </div>
 
-        <div class="card">
-            <div *ngFor="let p of activeProjects" class="project">
-                <div>
-                    <div class="title">{{p.title}} <span class="muted">• {{p.subtitle}}</span></div>
-                    <div class="muted">Status: {{p.status}}</div>
-                </div>
-                <div class="actions">
-                    <span class="badge status">{{p.status}}</span>
-                    <button class="btn btn-sm btn-outline-primary" (click)="messageArtisan(p)">Message Artisan</button>
+        <!-- Active Projects Section -->
+        <div class="card projects-card">
+            <h3 class="card-title">Your Active Projects</h3>
+
+            <div class="projects-list">
+                <div class="project-item" *ngFor="let project of activeProjects">
+                    <div class="project-icon" [ngClass]="getProjectIconClass(project.title)">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            @if (project.title.includes('Kitchen')) {
+                            <path
+                                d="M3 2.5a2.5 2.5 0 0 1 5 0V3h1v-.5a3.5 3.5 0 1 0-7 0V3h1v-.5zM4 4v5.5a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 9.5V4H4zm5 1.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-2 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5z" />
+                            }
+                            @if (project.title.includes('Wedding')) {
+                            <path
+                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            }
+                            @if (!project.title.includes('Kitchen') && !project.title.includes('Wedding')) {
+                            <path
+                                d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                            }
+                        </svg>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-title">{{project.title}}</div>
+                        <div class="project-subtitle">{{project.subtitle}}</div>
+                    </div>
+                    <div class="project-status">
+                        <span class="status-badge" [ngClass]="getStatusClass(project.status)">
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg>
+                            {{project.status}}
+                        </span>
+                        <button class="btn-message" (click)="messageArtisan(project)">Message Artisan</button>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Favorite Artisans Section -->
+        <div class="card favorites-card">
+            <div class="card-header">
+                <h3 class="card-title">Your Favorite Artisans</h3>
+            </div>
 
-        <div class="card mt">
-            <h4>Your Favorite Artisans</h4>
-            <div class="avatars">
-                <div class="a" *ngFor="let f of favorites"> <img src="/assets/avatar-placeholder.png" alt="f">
-                    <div class="name">{{f}}</div>
+            <div class="artisans-grid">
+                <div class="artisan-card" *ngFor="let artisan of favoriteArtisans">
+                    <img [src]="artisan.avatar" [alt]="artisan.name" class="artisan-avatar">
+                    <div class="artisan-name">{{artisan.name}}</div>
+                    <div class="artisan-role">{{artisan.role}}</div>
+                    <div class="artisan-rating">
+                        <svg *ngFor="let star of [1,2,3,4,5]" width="14" height="14" fill="currentColor"
+                            viewBox="0 0 16 16" [class.filled]="star <= artisan.rating">
+                            <path
+                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

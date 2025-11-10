@@ -14,10 +14,10 @@
                     <a class="nav-link active text-white" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-success text-white" href="#">Hire an Artisan</button>
+                    <button class="btn btn-success text-white" routerLink="/signup">Get Started </button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-success text-white" href="#">Become an Artisan</button>
+                    <button class="btn btn-success text-white" routerLink="/customer_signin" >Login</button>
                 </li>
             </ul>
         </div>
@@ -28,8 +28,8 @@
         <h1 class="hero-title mb-3">Find Trusted Artisans Near You</h1>
         <p class="hero-subtitle mb-4">Hire plumbers, electricians, tailors and more in minutes.</p>
         <div class="hero-buttons">
-            <button type="button" class="btn btn-outline-success text-white btn-hero me-2 mb-2">Hire an Artisan</button>
-            <button type="button" class="btn btn-success btn-hero mb-2">Become an Artisan</button>
+            <button type="button" class="btn btn-outline-success text-white btn-hero me-2 mb-2" routerLink="/signup">Hire an Artisan</button>
+            <button type="button" class="btn btn-success btn-hero mb-2" routerLink="/artisan-signup" >Become an Artisan</button>
         </div>
     </div>
 </div>
@@ -263,7 +263,7 @@
             <div class="col-lg-6">
                 <div class="artisan-cta text-center text-lg-start">
                     <h4 class="mb-3 fw-semibold">Join hundreds of Skilled artisans earning daily on [your app name]</h4>
-                    <button type="button" class="btn btn-success btn-lg px-4">Sign Up as an Artisan</button>
+                    <button type="button" class="btn btn-success btn-lg px-4" routerLink="/artisan-signup">Sign Up as an Artisan</button>
                 </div>
             </div>
         </div>
