@@ -25,8 +25,15 @@
             </div>
         </div>
 
-        <nav class="nav">
+        <!-- <nav class="nav">
             <a *ngFor="let item of navItems" (click)="go(item.id)" [class.active]="active===item.id">
+                <span class="nav-icon" [innerHTML]="item.icon"></span>
+                {{item.label}}
+            </a>
+        </nav> -->
+        <nav class="nav">
+            <a *ngFor="let item of navItems" [routerLink]="item.routerLink || null" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
                 <span class="nav-icon" [innerHTML]="item.icon"></span>
                 {{item.label}}
             </a>

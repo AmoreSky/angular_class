@@ -11,15 +11,33 @@ import { ArtisanSignin } from './artisan-signin/artisan-signin';
 import { authGuardGuard } from './auth-guard-guard';
 import { SubCategory } from './sub-category/sub-category';
 import { artisanAuthGuardGuard } from './artisan-auth-guard-guard';
+import { Subcategory } from './subcategory/subcategory';
+import { Services } from './services/services';
+import { AdminSignin } from './admin-signin/admin-signin';
+import { adminAuthGuardGuard } from './admin-auth-guard-guard';
+import { AddAdmin } from './add-admin/add-admin';
 
 export const routes: Routes = [
     { path: '', component: HOMEPAGE },
     { path: 'signup', component: Signup },
     { path: 'customer_signin', component: CUSTOMERSIGNIN },
-    { path: 'artisan-dashboard', component: ARTISANDASHBOARD , canActivate: [artisanAuthGuardGuard]},
-    { path: 'client-dashboard', component: CLIENTDASHBOARD, canActivate: [authGuardGuard] },
-    { path: 'admin-dashboard', component: ADMINDASHBOARD },
+    {path: 'admin_signin', component: AdminSignin},
+    { path: 'artisan-dashboard', canActivate: [artisanAuthGuardGuard], 
+        children: [
+            {path: '', component: ARTISANDASHBOARD},
+            {path: 'services', component: Services}
+        ]
+    },
+    { path: 'client-dashboard', component:CLIENTDASHBOARD, canActivate: [authGuardGuard]},
+    { path: 'admin-dashboard', canActivate:[adminAuthGuardGuard],
+        children: [
+            {path: '', component: ADMINDASHBOARD},
+            {path: 'add-admin', component: AddAdmin}
+        ]
+     },
     {path: 'artisan-signup', component: ArtisanSignup},
     {path: 'artisan-signin', component: ArtisanSignin},
-    {path:'sub-category', component:SubCategory}
+    {path:'sub-category', component:SubCategory},
+    {path:'subcategory', component:Subcategory},
+    // {path: ''}
 ];

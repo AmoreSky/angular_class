@@ -1,5 +1,5 @@
 <div class="dashboard-layout">
-    <app-side-bar [userName]="'Admin User'" [userRole]="'Administrator'" [navItems]="adminNavItems">
+    <app-side-bar [userName]="'Admin User'" [userRole]="'Administrator'" [navItems]="adminNavItems" (navigate)="onNav($event)">
     </app-side-bar>
 
     <div class="main-content">
@@ -10,6 +10,11 @@
                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
             </svg>
         </button>
+          <div class="topbar">
+            <h2>Welcome, {{user}}!</h2>
+            <input class="form-control search" placeholder="Search...">
+            <button class="btn btn-success" (click)="logout()">Logout</button>
+          </div>
 
         <!-- Top Bar -->
         <div class="top-bar">

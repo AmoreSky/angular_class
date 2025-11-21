@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 export interface NavItem {
   id: string;
   label: string;
   icon: string;
+  routerLink:any;
 }
 
 @Component({
   selector: 'app-side-bar',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.css'
 })
