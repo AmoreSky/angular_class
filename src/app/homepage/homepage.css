@@ -104,7 +104,7 @@ body {
     .navbar .container-fluid {
         grid-template-columns: 1fr auto;
     }
-    
+
     .search-center-wrapper {
         grid-column: 1 / -1;
         justify-self: stretch;
