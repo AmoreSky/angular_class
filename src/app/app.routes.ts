@@ -16,6 +16,7 @@ import { Services } from './services/services';
 import { AdminSignin } from './admin-signin/admin-signin';
 import { adminAuthGuardGuard } from './admin-auth-guard-guard';
 import { AddAdmin } from './add-admin/add-admin';
+import { ViewServiceDetails } from './view-service-details/view-service-details';
 
 export const routes: Routes = [
     { path: '', component: HOMEPAGE },
@@ -32,12 +33,14 @@ export const routes: Routes = [
     { path: 'admin-dashboard', canActivate:[adminAuthGuardGuard],
         children: [
             {path: '', component: ADMINDASHBOARD},
-            {path: 'add-admin', component: AddAdmin}
+            {path: 'add-admin', component: AddAdmin},
+            {path:'subcategory', component:Subcategory}
         ]
      },
     {path: 'artisan-signup', component: ArtisanSignup},
     {path: 'artisan-signin', component: ArtisanSignin},
     {path:'sub-category', component:SubCategory},
-    {path:'subcategory', component:Subcategory},
+    {path:'viewService/:id/:artid', component:ViewServiceDetails},
+    
     // {path: ''}
 ];

@@ -6,7 +6,7 @@ import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-customer-signin',
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, CommonModule],
   templateUrl: './customer_signin.html',
   styleUrl: './customer_signin.css'
 })
@@ -23,32 +23,33 @@ export class CUSTOMERSIGNIN {
     ]],
   })
 
-  seeError = false;
-  message = '';
+  errorMessage = '';
+  successMessage = '';
 
   login() {
-    // console.log(this.signinForm.valid);
+    this.errorMessage = '';
+    this.successMessage = '';
     this.http.post('http://localhost/Hirein/auth/customer_signin', this.loginForm.value)
-      .subscribe((response: any) => {
-        if (response.status === 200) {
-          console.log(response);
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/client-dashboard'])
-        } else {
-          this.seeError = true;
-          this.message = response.message;
-          console.log(this.message);
-          // ensure the template updates immediately
+      .subscribe({
+        next: (response: any) => {
+          if (response.status === 200) {
+            localStorage.setItem('token', response.token);
+            console.log(response);
+            
+            this.successMessage = 'Login successful! Redirecting...';
+            this.cd.detectChanges();
+            setTimeout(() => {
+              this.router.navigate(['/client-dashboard'])
+            }, 2000)
+          } else {
+            this.errorMessage = response.message || 'Login failed. Please try again.';
+            this.cd.detectChanges();
+          }
+        },
+        error: (error) => {
+          this.errorMessage = error?.error?.message || 'An error occurred. Please try again.';
           this.cd.detectChanges();
         }
-      }, (err: any) => {
-        // handle HTTP/network errors
-        this.seeError = true;
-        this.message = err?.error?.message || 'An error occurred. Please try again.';
-        console.error('signin error', err);
-        this.cd.detectChanges();
       })
-
   }
-
 }

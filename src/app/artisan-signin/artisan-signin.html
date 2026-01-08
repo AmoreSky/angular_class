@@ -1,17 +1,38 @@
 <div id="body" class="d-flex align-items-center py-3">
     <div class="container">
         <div class="signin-card mx-auto">
-            <div class="text-center mb-3">
-                <div class="signin-icon mb-2">
+            <div class="text-center mb-2">
+                <div class="signin-icon mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
                         class="bi bi-tools text-success" viewBox="0 0 16 16">
                         <path
                             d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z" />
                     </svg>
                 </div>
-                <h2 class="fw-bold text-success mb-1">Artisan Login</h2>
+                <h2 class="fw-bold text-success mb-0">Artisan Login</h2>
                 <p class="text-muted small">Sign in to your artisan account</p>
             </div>
+
+            @if (successMessage) {
+            <div class="custom-alert alert-success-custom mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+                <span>{{successMessage}}</span>
+            </div>
+            }
+            @if (errorMessage) {
+            <div class="custom-alert alert-danger-custom mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                </svg>
+                <span>{{errorMessage}}</span>
+            </div>
+            }
 
             <form [formGroup]="loginForm">
                 <div class="form-group">
@@ -20,29 +41,33 @@
                         placeholder="Enter your email"
                         [class.is-invalid]="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
                         [class.is-valid]="!loginForm.get('email')?.errors && loginForm.get('email')?.touched">
-                    @if (loginForm.get('email')?.errors && loginForm.get('email')?.dirty){
-                    <div class="invalid-feedback">
-                        <span *ngIf="loginForm.get('email')?.hasError('required')">Email is required</span>
-                        <span *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email
-                            address</span>
+                    <div class="error-container">
+                        @if (loginForm.get('email')?.errors && loginForm.get('email')?.dirty){
+                        <div class="invalid-feedback">
+                            <span *ngIf="loginForm.get('email')?.hasError('required')">Email is required</span>
+                            <span *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email
+                                address</span>
+                        </div>
+                        }
                     </div>
-                    }
                 </div>
 
-                <div class="form-group mt-2">
+                <div class="form-group mt-1">
                     <label class="form-label text-success fw-semibold">Password</label>
                     <input type="password" class="form-control form-control-lg" formControlName="password"
                         placeholder="Enter your password"
                         [class.is-invalid]="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
                         [class.is-valid]="!loginForm.get('password')?.errors && loginForm.get('password')?.touched">
-                    @if (loginForm.get('password')?.errors && loginForm.get('password')?.dirty){
-                    <div class="invalid-feedback">
-                        <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required</span>
+                    <div class="error-container">
+                        @if (loginForm.get('password')?.errors && loginForm.get('password')?.dirty){
+                        <div class="invalid-feedback">
+                            <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required</span>
+                        </div>
+                        }
                     </div>
-                    }
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                <div class="d-flex justify-content-between align-items-center mt-1 mb-2">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="rememberMe">
                         <label class="form-check-label small text-muted" for="rememberMe">
@@ -62,7 +87,8 @@
 
             <div class="text-center mt-3">
                 <p class="text-muted mb-1 small">Looking for services?</p>
-                <a routerLink="/customer_signin" class="text-success fw-semibold text-decoration-none small">Sign in as Customer
+                <a routerLink="/customer_signin" class="text-success fw-semibold text-decoration-none small">Sign in as
+                    Customer
                     →</a>
             </div>
 

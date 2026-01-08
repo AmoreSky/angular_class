@@ -1,79 +1,402 @@
-<div>
-    <div class="form-group mb-2">
-        <label for="">Service Title</label>
-        <input type="text" class="form-control">
-    </div>
-    <div class="form-group mb-2">
-        <label for="">Description</label>
-        <input type="text" name="" id="" class="form-control">
-    </div>
-    <div class="form-group mb-2">
-        <label for="">Category</label>
-        <select name="" id="" class="form-select custom-select" [(ngModel)]="category_id" (change)="getid()">
-            <option selected disabled>Select a category</option>
-            @for (item of categories; track $index) {
-            <option value="{{item[0]}}">{{item[1]}} </option>
-            }
-        </select>
-    </div>
+<div class="dashboard-layout services-page">
+    <app-artisan-side-bar></app-artisan-side-bar>
 
-    <div class="form-group mb-2">
-        <label for="">Sub Category</label>
-        @for (item of subcategories; track $index) {
-        <div>
-            <input type="checkbox" name="" id="" value="{{item[1]}}" (change)="select($event)">
-            <label for="">{{item[1]}}</label>
+    <div class="main-content">
+        <button class="mobile-menu-btn" (click)="toggleMenu()" aria-label="Open menu">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+
+        <div class="topbar">
+            <h2>Create Service</h2>
+            <div class="top-actions">
+                <div>
+                    <button class="btn btn-lg btn-success text-light" data-bs-toggle="modal"
+                        data-bs-target="#searchModal">Find
+                        a service
+                        <img src="assets/circle.png" alt="" width="30px" class="ms-5">
+                    </button>
+                </div>
+                <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <div class="w-100">
+                        <h1 class="modal-title fs-4 fw-bold mb-3" id="searchModalLabel">Find a Service</h1>
+                        <div class="search-input-wrapper position-relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-search search-icon" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                            <input type="text" placeholder="Search for tailoring, plumbing, electrical..."
+                                class="form-control search-input shadow-none" (keyup)="search($event)">
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-3">
+                    @if (updated.length > 0) {
+                    <div class="row g-3">
+                        @for (result of updated; track $index) {
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="service-card h-100">
+                                <div class="service-image-wrapper">
+                                    @if (result.images?.length > 0) {
+                                    <div [id]="'carousel-' + $index" class="carousel slide service-images"
+                                        data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @for (img of result.images; track $index) {
+                                            <div class="carousel-item" [class.active]="$index === 0">
+                                                <img [src]="img" class="service-img d-block w-100" alt="Service image"
+                                                    onerror="this.src='assets/placeholder.png'">
+                                            </div>
+                                            }
+                                        </div>
+                                        @if (result.images.length > 1) {
+                                        <button class="carousel-control-prev" type="button"
+                                            [attr.data-bs-target]="'#carousel-' + $index" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            [attr.data-bs-target]="'#carousel-' + $index" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                        <div class="carousel-indicators">
+                                            @for (img of result.images; track $index) {
+                                            <button type="button" [attr.data-bs-target]="'#carousel-' + $index"
+                                                [attr.data-bs-slide-to]="$index" [class.active]="$index === 0"
+                                                [attr.aria-current]="$index === 0 ? 'true' : null"
+                                                [attr.aria-label]="'Slide ' + ($index + 1)"></button>
+                                            }
+                                        </div>
+                                        <div class="more-images-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                                                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                                                <path
+                                                    d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z" />
+                                            </svg>
+                                            {{ result.images.length }} photos
+                                        </div>
+                                        }
+                                    </div>
+                                    } @else {
+                                    <img src="assets/placeholder.png" class="service-img" alt="No image available">
+                                    }
+                                </div>
+                                <div class="service-card-body">
+                                    <h5 class="service-title">{{ result.item[2] || 'Untitled Service' }}</h5>
+                                    <p class="service-description">{{ result.item[5] || 'No description available' }}
+                                    </p>
+                                    <div class="service-meta">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-star-fill text-warning"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="text-muted small">4.8 (120 reviews)</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2 mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-geo-alt text-success"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                                <path
+                                                    d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                            </svg>
+                                            <span class="text-muted small">2.5 km away</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-success btn-sm flex-fill">View Details</button>
+                                        <button class="btn btn-outline-success btn-sm" title="Save">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    } @else {
+                    <div class="text-center py-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-search text-muted mb-3" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                        <h5 class="text-muted">This service has not been created</h5>
+                        <p class="text-muted">Try searching with different keywords</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+                <a class="btn btn-outline-secondary" routerLink="/artisan-dashboard">Back to Dashboard</a>
+            </div>
         </div>
 
-        <!-- <option value="{{item[0]}}">{{item[1]}}</option> -->
-        }
-    </div>
+        <div class="layout-grid">
+            <section class="card form-card">
+                <div class="form-header">
+                    <h3>Service Details</h3>
+                    <div class="muted">Create a clear, discoverable listing for your service.</div>
+                </div>
 
-    <div class="form-group mb-2">
-        <label for="">Mode of Service</label>
-        <div class="d-flex gap-1">
-            <div>
-                <input type="radio" name="" id="">
-                <label for="">Onsite</label>
-            </div>
-            <div>
-                <input type="radio" name="" id="">
-                <label for="">Virtual</label>
-            </div>
-            <div>
-                <input type="radio" name="" id="">
-                <label for="">Hybrid</label>
-            </div>
+                <form class="service-form" [formGroup]="serviceForm">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Service Title</label>
+                            <input type="text" class="form-control" placeholder="e.g. Custom Tailoring"
+                                formControlName="service_title"
+                                [class.is-invalid]="serviceForm.get('service_title')?.errors && serviceForm.get('service_title')?.touched"
+                                [class.is-valid]="!serviceForm.get('service_title')?.errors && serviceForm.get('service_title')?.touched">
+                            @if (serviceForm.get('service_title')?.errors && serviceForm.get('service_title')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('service_title')?.hasError('required')">Service title is
+                                    required</span>
+                                <span *ngIf="serviceForm.get('service_title')?.hasError('minlength')">Service title
+                                    cannot be less than 5</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field full">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="4" formControlName="description"
+                                placeholder="Describe what you offer and what's included"
+                                [class.is-invalid]="serviceForm.get('description')?.errors && serviceForm.get('description')?.touched"
+                                [class.is-valid]="!serviceForm.get('description')?.errors && serviceForm.get('description')?.touched"></textarea>
+                            @if (serviceForm.get('description')?.errors && serviceForm.get('description')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('description')?.hasError('required')">Service description
+                                    is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field">
+                            <label>Category</label>
+                            <select class="form-select" name="category" formControlName="category"
+                                (change)="getid($event)"
+                                [class.is-invalid]="serviceForm.get('category')?.errors && serviceForm.get('category')?.touched"
+                                [class.is-valid]="!serviceForm.get('category')?.errors && serviceForm.get('category')?.touched">
+                                <option [ngValue]="null" disabled selected>Select a category</option>
+                                @for (item of categories; track $index) {
+                                <option value="{{item[0]}}">{{item[1]}} </option>
+                                }
+                            </select>
+                            @if (serviceForm.get('category')?.errors && serviceForm.get('category')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('category')?.hasError('required')">Category is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field">
+                            <label for="">Sub Category</label>
+                            <div class="modes">
+                                @for (item of subcategories; track $index) {
+                                <div class=" d-flex mode">
+                                    <input type="checkbox" name="" id="" value="{{item[1]}}" (change)="select($event)">
+                                    <label for="" class="ms-1">{{item[1]}}</label>
+                                </div>
+
+                                <!-- <option value="{{item[0]}}">{{item[1]}}</option> -->
+                                }
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="field">
+                            <label>Mode</label>
+                            <div class="modes">
+                                <label class="mode"><input type="radio" formControlName="MOD" value="onsite">
+                                    Onsite</label>
+                                <label class="mode"><input type="radio" formControlName="MOD" value="virtual">
+                                    Virtual</label>
+                                <label class="mode"><input type="radio" formControlName="MOD" value="hybrid">
+                                    Hybrid</label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Base Price</label>
+                            <input type="number" class="form-control" placeholder="e.g. 5000"
+                                formControlName="base_price" (change)="getid($event)"
+                                [class.is-invalid]="serviceForm.get('base_price')?.errors && serviceForm.get('base_price')?.touched"
+                                [class.is-valid]="!serviceForm.get('base_price')?.errors && serviceForm.get('base_price')?.touched">
+                            @if (serviceForm.get('base_price')?.errors && serviceForm.get('base_price')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('base_price')?.hasError('required')">Base price is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field">
+                            <label>Currency</label>
+                            <select name="currency" id="currency" class="form-select" formControlName="currency"
+                                [class.is-invalid]="serviceForm.get('currency')?.errors && serviceForm.get('currency')?.touched"
+                                [class.is-valid]="!serviceForm.get('currency')?.errors && serviceForm.get('currency')?.touched">
+                                <option value="">Select currency</option>
+                                <option value="NGN">Nigerian Naira (₦)</option>
+                                <option value="USD">US Dollar ($)</option>
+                                <option value="EUR">Euro (€)</option>
+                                <option value="GBP">British Pound (£)</option>
+                                <option value="GHS">Ghana Cedi (₵)</option>
+                                <option value="AUD">Australian Dollar (A$)</option>
+                                <option value="CAD">Canadian Dollar (C$)</option>
+                                <option value="CNY">Chinese Yuan (¥)</option>
+                                <option value="JPY">Japanese Yen (¥)</option>
+                                <option value="INR">Indian Rupee (₹)</option>
+                                <option value="AED">UAE Dirham (د.إ)</option>
+                                <option value="ZAR">South African Rand (R)</option>
+                                <option value="KES">Kenyan Shilling (KSh)</option>
+                                <option value="EGP">Egyptian Pound (E£)</option>
+                                <option value="CHF">Swiss Franc (Fr.)</option>
+                                <option value="SEK">Swedish Krona (kr)</option>
+                                <option value="NOK">Norwegian Krone (kr)</option>
+                                <option value="DKK">Danish Krone (kr)</option>
+                                <option value="BRL">Brazilian Real (R$)</option>
+                                <option value="ARS">Argentine Peso ($)</option>
+                                <option value="MXN">Mexican Peso ($)</option>
+                                <option value="NZD">New Zealand Dollar ($)</option>
+                                <option value="SGD">Singapore Dollar (S$)</option>
+                                <option value="HKD">Hong Kong Dollar (HK$)</option>
+                                <option value="IDR">Indonesian Rupiah (Rp)</option>
+                                <option value="MYR">Malaysian Ringgit (RM)</option>
+                                <option value="PHP">Philippine Peso (₱)</option>
+                                <option value="PLN">Polish Zloty (zł)</option>
+                                <option value="PKR">Pakistani Rupee (₨)</option>
+                                <option value="BDT">Bangladeshi Taka (৳)</option>
+                                <option value="KHR">Cambodian Riel (៛)</option>
+                                <option value="KRW">South Korean Won (₩)</option>
+                                <option value="TRY">Turkish Lira (₺)</option>
+                                <option value="ILS">Israeli Shekel (₪)</option>
+                                <option value="QAR">Qatari Riyal (ر.ق)</option>
+                                <option value="KWD">Kuwaiti Dinar (د.ك)</option>
+                                <option value="OMR">Omani Rial (ر.ع.)</option>
+                                <option value="SAR">Saudi Riyal (ر.س)</option>
+                                <option value="HUF">Hungarian Forint (Ft)</option>
+                                <option value="RON">Romanian Leu (lei)</option>
+                            </select>
+                            @if (serviceForm.get('currency')?.errors && serviceForm.get('currency')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('currency')?.hasError('required')">Currency is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field">
+                            <label>Average Duration</label>
+                            <input type="text" class="form-control" placeholder="e.g. 2 days"
+                                formControlName="average_duration"
+                                [class.is-invalid]="serviceForm.get('average_duration')?.errors && serviceForm.get('average_duration')?.touched"
+                                [class.is-valid]="!serviceForm.get('currency')?.errors && serviceForm.get('currency')?.touched">
+                            @if (serviceForm.get('average_duration')?.errors &&
+                            serviceForm.get('average_duration')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('average_duration')?.hasError('required')">Average duration
+                                    is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field full">
+                            <label>Keywords</label>
+                            <input type="text" class="form-control" placeholder="e.g. tailoring, alterations"
+                                [class.is-invalid]="serviceForm.get('keywords')?.errors && serviceForm.get('keywords')?.touched"
+                                [class.is-valid]="!serviceForm.get('keywords')?.errors && serviceForm.get('keywords')?.touched"
+                                (change)="addKeywords($event)">
+                            <div class="hint muted">Separate keywords with commas to help discovery.</div>
+                            @if (serviceForm.get('keywords')?.errors && serviceForm.get('keywords')?.touched){
+                            <div class="invalid-feedback">
+                                <span *ngIf="serviceForm.get('keywords')?.hasError('required')">Average duration is
+                                    required</span>
+                            </div>
+                            }
+                        </div>
+
+                        <div class="field full">
+                            @for (item of previewURLs; track $index) {
+                            <img src="{{item}}" alt="">
+                            }
+                            <label>Pictures from previous services</label>
+                            <input type="file" class="form-control" (change)="uploadImages($event)" multiple
+                                accept="image/*">
+                            <div class="hint muted">Add clear photos of completed work (recommended 3-6 images).</div>
+                        </div>
+                        <span class="text-cneter text-danger my-3">{{message}}</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-success" (click)="submitService()">Save Service</button>
+                        <button type="button" class="btn btn-outline-success">Preview</button>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="preview-panel">
+                <section class="card preview-card">
+                    <div class="preview-header">
+                        <h4>Live Preview</h4>
+                        <div class="muted small">How your service will appear to customers</div>
+                    </div>
+
+                    <div class="service-preview">
+                        <div class="thumbs">
+                            <div class="thumb"><img src="/assets/avatar-placeholder.png" alt="thumb"></div>
+                            <!-- <div class="thumb"><img src="/assets/avatar-placeholder.png" alt="thumb"></div> -->
+                            <!-- <div class="thumb"><img src="/assets/avatar-placeholder.png" alt="thumb"></div> -->
+                        </div>
+                        <div class="preview-body">
+                            <div class="title">Custom Dress</div>
+                            <div class="meta muted">Tailoring • 3 days • #7000</div>
+                            <p class="desc muted">Well-crafted custom dresses made to your measurements. Includes
+                                fittings and minor alterations.</p>
+                        </div>
+                    </div>
+
+                    <section class="card mt small-card">
+                        <h5>Related Pages</h5>
+                        <nav class="related">
+                            <a routerLink="/profile">Profile</a>
+                            <a routerLink="/artisan-dashboard">Dashboard</a>
+                            <a routerLink="/subcategory">Sub Categories</a>
+                            <a routerLink="/signup">Signup</a>
+                        </nav>
+                    </section>
+
+                    <section class="card mt small-card">
+                        <h5>Tips</h5>
+                        <ul class="muted">
+                            <li>Use clear titles and reasonable pricing.</li>
+                            <li>Add photos to build trust.</li>
+                            <li>Pick accurate categories for discovery.</li>
+                        </ul>
+                    </section>
+                </section>
+            </aside>
         </div>
     </div>
-    <div class="form-group mb-2">
-        <label for="">Base Price</label>
-        <input type="number" class="form-control">
-    </div>
-    <div class="form-group mb-2">
-        <label for="">Currency</label>
-        <select name="currency" id="">
-            <option value=""># Naira</option>
-            <option value="">$ US Dollar</option>
-            <option value="">Cedi</option>
-            <option value="">Australian Dollar</option>
-            <option value="">Angolan Kwanza</option>
-            <option value="">Brunein Dollar</option>
-            <option value="">Euro</option>
-            <option value="">Albanian Lek</option>
-            <option value="">Argentine Peso</option>
-            <option value="">Aurban Florin</option>
-            <option value="">Azebaijani Manat</option>
-            <option value="">Buhraini Dinar</option>
-        </select>
-    </div>
-    <div class="form-group mb-2">
-        <label for="">Average Duration</label>
-        <input type="text" class="form-control">
-    </div>
-    <div class="form-group mb-2">
-        <label for="">Keywords</label>
-        <input type="text" class="form-control">
-    </div>
-
 </div>

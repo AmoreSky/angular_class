@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -11,13 +11,14 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './add-admin.css',
 })
 export class AddAdmin {
-private http = inject(HttpClient)
+  private http = inject(HttpClient)
   private builder = inject(FormBuilder)
   private router = inject(Router)
+  private cdr = inject(ChangeDetectorRef)
   users: any = [];
   sameAs: boolean = false;
   errorMessage: string = '';
-  showError: boolean = false;
+  successMessage: string = '';
 
   signupForm = this.builder.group({
     first_name: ['', [Validators.required, Validators.minLength(2)]],
@@ -30,33 +31,27 @@ private http = inject(HttpClient)
   })
 
   register() {
-    // console.log(this.signupForm.valid);
-    //this.users.push(this.signupForm.value);
-    //localStorage.setItem('users', JSON.stringify(this.users))
-    //send to Database
-    this.showError = false;
     this.errorMessage = '';
+    this.successMessage = '';
 
     this.users.push(this.signupForm.value)
-    // this.users.find(user=>{user.email === this.signUpForm.value.email})
-    // localStorage['users'] = JSON.stringify(this.users);
     this.http.post('http://localhost/Hirein/adminAuth/signup', this.signupForm.value)
       .subscribe({
         next: (response: any) => {
-          console.log(response)
           if (response.status === 200) {
-            console.log('I will go to Sign in');
-            this.router.navigate(['/admin_signin'])
+            this.successMessage = 'Admin account created successfully! Redirecting...';
+            this.cdr.detectChanges();
+            setTimeout(() => {
+              this.router.navigate(['/admin_signin'])
+            }, 2000);
           } else {
             this.errorMessage = response.message || 'Registration failed. Please try again.';
-            this.showError = true;
+            this.cdr.detectChanges();
           }
         },
         error: (error) => {
           this.errorMessage = 'An error occurred. Please check your connection and try again.';
-          this.showError = true;
-          console.error('Error:', error);
-
+          this.cdr.detectChanges();
         }
       })
 

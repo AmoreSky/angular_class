@@ -12,9 +12,10 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
 
   if (token){
     const decoded:any = jwtDecode<JwtPayload>(token);
+    const userType:any = decoded.role
     const expTime = decoded.exp * 1000 ;
     const now = Date.now()
-    if (( now - expTime) < 3600){
+    if (( now - expTime) < 3600 && userType == 'customer'){
       return true;
     }else{
       router.navigate(["/customer_signin"])

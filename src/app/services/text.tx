@@ -1,0 +1,28 @@
+<label>Sub Categories</label>
+                            <div class="subcats">
+                                @for (item of subcategories; track $index) {
+                                <div>
+                                    <input type="checkbox" name="" id="" value="{{item[1]}}" (change)="select($event)" formControlName="sub-category"
+                                    [class.is-invalid]="serviceForm.get('sub-category')?.errors && serviceForm.get('sub-category')?.touched"
+                                    [class.is-valid]="!serviceForm.get('sub-category')?.errors && serviceForm.get('sub-category')?.touched">>
+                                    <label for="" class="checkbox">{{item[1]}}</label>
+                                </div>
+                                 <div *ngIf="!subcategories || subcategories.length===0" class="muted">No subcategories
+                                    available for this category.</div>
+                                @if (serviceForm.get('category')?.errors && serviceForm.get('category')?.touched){
+                                <div class="invalid-feedback">
+                                    <span *ngIf="serviceForm.get('category')?.hasError('required')">Service title is
+                                        required</span>
+                                </div>
+                                }
+                            }
+
+if(token){
+      this.payload = jwtDecode<JwtPayload>(token);
+      if (this.payload.role === 'customer') { // check if the token has not expired     
+      }
+      
+    }else {
+      // navigate to the client login
+    }
+  

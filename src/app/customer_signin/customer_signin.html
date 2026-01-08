@@ -1,56 +1,76 @@
 <div id="body" class="d-flex align-items-center py-3">
     <div class="container">
         <div class="signin-card mx-auto">
-            <div class="text-center mb-3">
-                <div class="signin-icon mb-2">
+            <div class="text-center mb-2">
+                <div class="signin-icon mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
                         class="bi bi-person-lock text-success" viewBox="0 0 16 16">
                         <path
                             d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4q.845.002 1.544.107a4.5 4.5 0 0 0-.803.918A11 11 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1" />
                     </svg>
                 </div>
-                <h2 class="fw-bold text-success mb-1">Welcome Back</h2>
+                <h2 class="fw-bold text-success mb-0">Welcome Back</h2>
                 <p class="text-muted small">Sign in to your HIREIN account</p>
             </div>
 
+            @if (successMessage) {
+            <div class="custom-alert alert-success-custom mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+                <span>{{successMessage}}</span>
+            </div>
+            }
+            @if (errorMessage) {
+            <div class="custom-alert alert-danger-custom mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                </svg>
+                <span>{{errorMessage}}</span>
+            </div>
+            }
+
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-group">
-                    @if (seeError) {
-                    <div class="alert alert-danger mt-2 py-2" role="alert">
-                        {{ message }}
-                    </div>
-                    }
                     <label class="form-label text-success fw-semibold">Email Address</label>
                     <input type="email" class="form-control form-control-lg" formControlName="email"
                         placeholder="Enter your email"
                         [class.is-invalid]="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
                         [class.is-valid]="!loginForm.get('email')?.errors && loginForm.get('email')?.touched">
-                    @if (loginForm.get('email')?.errors && loginForm.get('email')?.dirty){
-                    <div class="invalid-feedback">
-                        <span *ngIf="loginForm.get('email')?.hasError('required')">Email is required</span>
-                        <span *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email
-                            address</span>
+                    <div class="error-container">
+                        @if (loginForm.get('email')?.errors && loginForm.get('email')?.dirty){
+                        <div class="invalid-feedback">
+                            <span *ngIf="loginForm.get('email')?.hasError('required')">Email is required</span>
+                            <span *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email
+                                address</span>
+                        </div>
+                        }
                     </div>
-                    }
                 </div>
 
-                <div class="form-group mt-2">
+                <div class="form-group mt-1">
                     <label class="form-label text-success fw-semibold">Password</label>
                     <input type="password" class="form-control form-control-lg" formControlName="password"
                         placeholder="Enter your password"
                         [class.is-invalid]="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
                         [class.is-valid]="!loginForm.get('password')?.errors && loginForm.get('password')?.touched">
-                    @if (loginForm.get('password')?.errors && loginForm.get('password')?.dirty){
-                    <div class="invalid-feedback">
-                        <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required</span>
-                        <span *ngIf="loginForm.get('password')?.hasError('pattern')">
-                            Invalid password format
-                        </span>
+                    <div class="error-container">
+                        @if (loginForm.get('password')?.errors && loginForm.get('password')?.dirty){
+                        <div class="invalid-feedback">
+                            <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required</span>
+                            <span *ngIf="loginForm.get('password')?.hasError('pattern')">
+                                Invalid password format
+                            </span>
+                        </div>
+                        }
                     </div>
-                    }
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                <div class="d-flex justify-content-between align-items-center mt-1 mb-2">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="rememberMe">
                         <label class="form-check-label small text-muted" for="rememberMe">

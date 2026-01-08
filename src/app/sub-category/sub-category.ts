@@ -468,8 +468,7 @@ export class SubCategory {
   }
 
   showSuccessMessage(message: string) {
-    // In a real app, you'd use a toast notification service
-    console.log('Success:', message);
+    // Toast notification would be implemented here
   }
 
   getTotalSubcategories(): number {
@@ -481,8 +480,7 @@ export class SubCategory {
       name: cat.name,
       subcategories: cat.subcategories
     }));
-    console.log('Export data:', JSON.stringify(data, null, 2));
-    // In a real app, you'd download this as JSON or CSV
+    // Download as JSON or CSV would be implemented here
   }
 }
 

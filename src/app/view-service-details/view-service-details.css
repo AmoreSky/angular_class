@@ -1,0 +1,489 @@
+/* Service Details Container */
+.service-details-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding-bottom: 3rem;
+}
+
+/* Images Section */
+.images-section {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.main-carousel {
+    position: relative;
+}
+
+.main-service-image {
+    height: 450px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.main-carousel:hover .carousel-control-prev,
+.main-carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Carousel Dot Indicators */
+.carousel-indicators {
+    margin-bottom: 12px;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+    background-color: #198754;
+    border-color: #198754;
+    transform: scale(1.2);
+}
+
+/* Thumbnail Indicators */
+.carousel-thumbnails {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    overflow-x: auto;
+    background: #fff;
+}
+
+.thumbnail-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.thumbnail-img:hover {
+    border-color: #198754;
+    transform: scale(1.05);
+}
+
+.thumbnail-img.active {
+    border-color: #198754;
+}
+
+.no-image-placeholder {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+/* Details Card */
+.details-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.service-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+/* Artisan Info */
+.artisan-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.artisan-avatar {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.artisan-label {
+    font-size: 0.8rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.artisan-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Rating Section */
+.rating-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+    color: #ffc107;
+}
+
+.rating-text {
+    color: #6c757d;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Price Section */
+.price-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.price-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.price-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #198754;
+}
+
+/* Description Section */
+.description-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 1rem;
+}
+
+.description-text {
+    color: #495057;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.info-icon {
+    color: #198754;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Subcategories and Keywords */
+.subcategories-section,
+.keywords-section {
+    margin-bottom: 1.5rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.tag-primary {
+    background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+    color: white;
+}
+
+.tag-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
+}
+
+.tag-secondary {
+    background: #e9ecef;
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+.tag-secondary:hover {
+    background: #dee2e6;
+    transform: translateY(-2px);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.action-buttons .btn-lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn-success {
+    background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+    border: none;
+}
+
+.action-buttons .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(25, 135, 84, 0.3);
+}
+
+.action-buttons .btn-outline-success {
+    border: 2px solid #198754;
+    color: #198754;
+    background: transparent;
+}
+
+.action-buttons .btn-outline-success:hover {
+    background: #198754;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(25, 135, 84, 0.3);
+}
+
+/* Loading Container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .main-service-image {
+        height: 350px;
+    }
+
+    .service-title {
+        font-size: 1.75rem;
+    }
+
+    .price-value {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-details-container {
+        padding-bottom: 2rem;
+    }
+
+    .details-card {
+        padding: 1.5rem;
+    }
+
+    .main-service-image {
+        height: 280px;
+    }
+
+    .service-title {
+        font-size: 1.5rem;
+    }
+
+    .price-value {
+        font-size: 1.5rem;
+    }
+
+    .thumbnail-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn-lg {
+        width: 100%;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-control-next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .details-card {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .main-service-image,
+    .no-image-placeholder {
+        height: 220px;
+    }
+
+    .service-title {
+        font-size: 1.25rem;
+    }
+
+    .artisan-info {
+        padding: 0.75rem;
+    }
+
+    .artisan-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .artisan-name {
+        font-size: 1rem;
+    }
+
+    .price-section {
+        padding: 1rem;
+    }
+
+    .price-value {
+        font-size: 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .thumbnail-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .carousel-thumbnails {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
+    }
+}

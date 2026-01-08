@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router } from "@angular/router";
 import { CommonModule } from '@angular/common';
@@ -15,11 +15,12 @@ export class ArtisanSignup {
   private http = inject(HttpClient)
   private builder = inject(FormBuilder)
   private router = inject(Router)
+  private cdr = inject(ChangeDetectorRef)
 
   users: any = [];
   sameAs: boolean = false
-  errorMessage: string = '';
-  showError: boolean = false;
+  errorMessage = '';
+  message = '';
 
   signupForm = this.builder.group({
     first_name: ['', [Validators.required, Validators.minLength(2)]],
@@ -32,36 +33,34 @@ export class ArtisanSignup {
   })
 
   register() {
-    // console.log(this.signupForm.valid);
-    //this.users.push(this.signupForm.value);
-    //localStorage.setItem('users', JSON.stringify(this.users))
-    //send to Database
-    this.showError = false;
     this.errorMessage = '';
+    this.message = '';
 
     this.users.push(this.signupForm.value)
-    // this.users.find(user=>{user.email === this.signUpForm.value.email})
-    // localStorage['users'] = JSON.stringify(this.users);
     this.http.post('http://localhost/Hirein/artisanAuth/artisan-signup', this.signupForm.value)
       .subscribe({
         next: (response: any) => {
-          console.log(response)
+          console.log('Response:', response)
           if (response.status === 200) {
-            console.log('I will go to Sign in');
-            this.router.navigate(['/artisan-signin'])
+            this.message = 'Signup Successful!'
+            console.log('Message set to:', this.message);
+            this.cdr.detectChanges();
+            setTimeout(() => {
+              this.router.navigate(['/artisan-signin'])
+            }, 2000)
           } else {
             this.errorMessage = response.message || 'Registration failed. Please try again.';
-            this.showError = true;
+            console.log('Error message set to:', this.errorMessage);
+            this.cdr.detectChanges();
           }
         },
         error: (error) => {
           this.errorMessage = 'An error occurred. Please check your connection and try again.';
-          this.showError = true;
+          console.log('Error message set to:', this.errorMessage);
+          this.cdr.detectChanges();
           console.error('Error:', error);
-
         }
       })
-
   }
 
 

@@ -11,44 +11,34 @@ import { FormsModule } from '@angular/forms';
 })
 export class Subcategory implements OnInit {
   private _http = inject(HttpClient);
-  categories:any;
+  categories: any;
 
   ngOnInit(): void {
-    this._http.get('http://localhost/Hirein/categories').subscribe((response:any) => {
+    this._http.get('http://localhost/Hirein/categories').subscribe((response: any) => {
       if (response.status === 200) {
-        
         this.categories = response.categories;
-        console.log(this.categories);
-        
-      } else {
-        console.log(response);
       }
     })
   }
 
-  category_id:number = 0;
-  added_items:any = [];
-  add(event:any) {
+  category_id: number = 0;
+  added_items: any = [];
+  message = '';
+
+  add(event: any) {
     this.added_items.push(event.target.value);
-    
   }
 
-  message = '';
   addSubCategories() {
     if (this.category_id && this.added_items.length > 0) {
-      // Send data to the backend
-      const data  = {category_id: this.category_id, subcategories: this.added_items};
+      const data = { category_id: this.category_id, subcategories: this.added_items };
 
-      this._http.post('http://localhost/Hirein/subcategories', data).subscribe((response:any) => {
+      this._http.post('http://localhost/Hirein/subcategories', data).subscribe((response: any) => {
         if (response.status === 200) {
-          console.log(response.message);
-          
-        }else {
-          console.log(response);
-          
+          this.message = response.message || 'Subcategories added successfully';
         }
-      })  
-    }else {
+      })
+    } else {
       this.message = 'Please select a category and add at least one sub-category.';
     }
   }

@@ -1,0 +1,56 @@
+<div class="sidebar-wrapper" [class.sidebar-open]="isOpen">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="logo">
+                    <img src="/assets/hiring.png" alt="Hirein Logo">
+                </span>
+                <h4>Hirein</h4>
+            </div>
+            <button class="sidebar-close" (click)="toggleSidebar()" aria-label="Close menu">×</button>
+        </div>
+
+        <div class="profile">
+            <div class="avatar"><img src="/assets/avatar-placeholder.png" alt="user"></div>
+            <div class="meta">
+                <div class="name">{{userName}}</div>
+                <div class="role">{{userRole}}</div>
+            </div>
+        </div>
+
+        <div class="menu-title">Admin Menu</div>
+        <nav class="nav">
+            <!-- Static fallback links matching admin dashboard -->
+            <a routerLink="/admin-dashboard/add-admin" routerLinkActive="active">
+                <span class="nav-icon"> <!-- add admin icon --> </span>
+                Add Admin
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- artisan management icon --> </span>
+                Artisan Management
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- user management icon --> </span>
+                User Management
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- categories icon --> </span>
+                Categories
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- disputes icon --> </span>
+                Disputes
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- payments icon --> </span>
+                Payments & Reports
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- settings icon --> </span>
+                Settings
+            </a>
+        </nav>
+
+        <div class="footer">© {{currentYear}} Hirein</div>
+    </div>
+</div>

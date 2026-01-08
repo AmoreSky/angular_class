@@ -1,0 +1,60 @@
+<div class="sidebar-wrapper" [class.sidebar-open]="isOpen">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="logo">
+                    <img src="/assets/hiring.png" alt="Hirein Logo">
+                </span>
+                <h4>Hirein</h4>
+            </div>
+            <button class="sidebar-close" (click)="toggleSidebar()" aria-label="Close sidebar">×</button>
+        </div>
+
+        <div class="profile">
+            <div class="avatar"><img src="/assets/avatar-placeholder.png" alt="user"></div>
+            <div class="meta">
+                <div class="name">{{userName}}</div>
+                <div class="role">{{userRole}}</div>
+            </div>
+        </div>
+
+        <div class="menu-title">Artisan Menu</div>
+        <nav class="nav">
+            <!-- Static fallback links to ensure the menu is visible on pages that may not wire inputs -->
+            <a routerLink="/artisan-dashboard" routerLinkActive="active">
+                <span class="nav-icon"> <!-- dashboard icon --> </span>
+                Dashboard
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- job offers icon --> </span>
+                Job Offers
+            </a>
+            <a routerLink="/artisan-dashboard/services" routerLinkActive="active">
+                <span class="nav-icon"> <!-- job offers icon --> </span>
+                Services
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- projects icon --> </span>
+                My Projects
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- earnings icon --> </span>
+                Earnings
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- messages icon --> </span>
+                Messages
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- profile icon --> </span>
+                My Profile
+            </a>
+            <a routerLink="#" routerLinkActive="active">
+                <span class="nav-icon"> <!-- settings icon --> </span>
+                Settings
+            </a>
+        </nav>
+
+        <div class="footer">© {{currentYear}} Hirein</div>
+    </div>
+</div>
