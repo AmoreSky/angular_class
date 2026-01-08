@@ -19,132 +19,147 @@
                         <img src="assets/circle.png" alt="" width="30px" class="ms-5">
                     </button>
                 </div>
-                <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header border-0 pb-0">
-                    <div class="w-100">
-                        <h1 class="modal-title fs-4 fw-bold mb-3" id="searchModalLabel">Find a Service</h1>
-                        <div class="search-input-wrapper position-relative">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-search search-icon" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                            </svg>
-                            <input type="text" placeholder="Search for tailoring, plumbing, electrical..."
-                                class="form-control search-input shadow-none" (keyup)="search($event)">
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body pt-3">
-                    @if (updated.length > 0) {
-                    <div class="row g-3">
-                        @for (result of updated; track $index) {
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <div class="service-card h-100">
-                                <div class="service-image-wrapper">
-                                    @if (result.images?.length > 0) {
-                                    <div [id]="'carousel-' + $index" class="carousel slide service-images"
-                                        data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            @for (img of result.images; track $index) {
-                                            <div class="carousel-item" [class.active]="$index === 0">
-                                                <img [src]="img" class="service-img d-block w-100" alt="Service image"
-                                                    onerror="this.src='assets/placeholder.png'">
-                                            </div>
-                                            }
-                                        </div>
-                                        @if (result.images.length > 1) {
-                                        <button class="carousel-control-prev" type="button"
-                                            [attr.data-bs-target]="'#carousel-' + $index" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                            [attr.data-bs-target]="'#carousel-' + $index" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                        <div class="carousel-indicators">
-                                            @for (img of result.images; track $index) {
-                                            <button type="button" [attr.data-bs-target]="'#carousel-' + $index"
-                                                [attr.data-bs-slide-to]="$index" [class.active]="$index === 0"
-                                                [attr.aria-current]="$index === 0 ? 'true' : null"
-                                                [attr.aria-label]="'Slide ' + ($index + 1)"></button>
-                                            }
-                                        </div>
-                                        <div class="more-images-badge">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-                                                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
-                                                <path
-                                                    d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z" />
-                                            </svg>
-                                            {{ result.images.length }} photos
-                                        </div>
-                                        }
+                <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header border-0 pb-0">
+                                <div class="w-100">
+                                    <h1 class="modal-title fs-4 fw-bold mb-3" id="searchModalLabel">Find a Service</h1>
+                                    <div class="search-input-wrapper position-relative">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-search search-icon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                        </svg>
+                                        <input type="text" placeholder="Search for tailoring, plumbing, electrical..."
+                                            class="form-control search-input shadow-none" (keyup)="search($event)">
                                     </div>
-                                    } @else {
-                                    <img src="assets/placeholder.png" class="service-img" alt="No image available">
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body pt-3">
+                                @if (updated.length > 0) {
+                                <div class="row g-3">
+                                    @for (result of updated; track $index) {
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="service-card h-100">
+                                            <div class="service-image-wrapper">
+                                                @if (result.images?.length > 0) {
+                                                <div [id]="'carousel-' + $index" class="carousel slide service-images"
+                                                    data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @for (img of result.images; track $index) {
+                                                        <div class="carousel-item" [class.active]="$index === 0">
+                                                            <img [src]="img" class="service-img d-block w-100"
+                                                                alt="Service image"
+                                                                onerror="this.src='assets/placeholder.png'">
+                                                        </div>
+                                                        }
+                                                    </div>
+                                                    @if (result.images.length > 1) {
+                                                    <button class="carousel-control-prev" type="button"
+                                                        [attr.data-bs-target]="'#carousel-' + $index"
+                                                        data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button"
+                                                        [attr.data-bs-target]="'#carousel-' + $index"
+                                                        data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                    <div class="carousel-indicators">
+                                                        @for (img of result.images; track $index) {
+                                                        <button type="button"
+                                                            [attr.data-bs-target]="'#carousel-' + $index"
+                                                            [attr.data-bs-slide-to]="$index"
+                                                            [class.active]="$index === 0"
+                                                            [attr.aria-current]="$index === 0 ? 'true' : null"
+                                                            [attr.aria-label]="'Slide ' + ($index + 1)"></button>
+                                                        }
+                                                    </div>
+                                                    <div class="more-images-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-images"
+                                                            viewBox="0 0 16 16">
+                                                            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                                                            <path
+                                                                d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z" />
+                                                        </svg>
+                                                        {{ result.images.length }} photos
+                                                    </div>
+                                                    }
+                                                </div>
+                                                } @else {
+                                                <img src="assets/placeholder.png" class="service-img"
+                                                    alt="No image available">
+                                                }
+                                            </div>
+                                            <div class="service-card-body">
+                                                <h5 class="service-title">{{ result.item[2] || 'Untitled Service' }}
+                                                </h5>
+                                                <p class="service-description">{{ result.item[5] || 'No description
+                                                    available' }}
+                                                </p>
+                                                <div class="service-meta">
+                                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-star-fill text-warning"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                        </svg>
+                                                        <span class="text-muted small">4.8 (120 reviews)</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2 mb-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-geo-alt text-success"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                                            <path
+                                                                d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                                        </svg>
+                                                        <span class="text-muted small">2.5 km away</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-success btn-sm flex-fill">View
+                                                        Details</button>
+                                                    <button class="btn btn-outline-success btn-sm" title="Save">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-bookmark"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     }
                                 </div>
-                                <div class="service-card-body">
-                                    <h5 class="service-title">{{ result.item[2] || 'Untitled Service' }}</h5>
-                                    <p class="service-description">{{ result.item[5] || 'No description available' }}
-                                    </p>
-                                    <div class="service-meta">
-                                        <div class="d-flex align-items-center gap-2 mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill text-warning"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                            <span class="text-muted small">4.8 (120 reviews)</span>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-2 mb-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-geo-alt text-success"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                                <path
-                                                    d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                                            </svg>
-                                            <span class="text-muted small">2.5 km away</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-success btn-sm flex-fill">View Details</button>
-                                        <button class="btn btn-outline-success btn-sm" title="Save">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                } @else {
+                                <div class="text-center py-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                                        class="bi bi-search text-muted mb-3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                    </svg>
+                                    <h5 class="text-muted">This service has not been created</h5>
+                                    <p class="text-muted">Try searching with different keywords</p>
                                 </div>
+                                }
                             </div>
                         </div>
-                        }
                     </div>
-                    } @else {
-                    <div class="text-center py-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
-                            class="bi bi-search text-muted mb-3" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
-                        <h5 class="text-muted">This service has not been created</h5>
-                        <p class="text-muted">Try searching with different keywords</p>
-                    </div>
-                    }
                 </div>
-            </div>
-        </div>
-    </div>
                 <a class="btn btn-outline-secondary" routerLink="/artisan-dashboard">Back to Dashboard</a>
             </div>
         </div>
@@ -166,10 +181,12 @@
                                 [class.is-valid]="!serviceForm.get('service_title')?.errors && serviceForm.get('service_title')?.touched">
                             @if (serviceForm.get('service_title')?.errors && serviceForm.get('service_title')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('service_title')?.hasError('required')">Service title is
-                                    required</span>
-                                <span *ngIf="serviceForm.get('service_title')?.hasError('minlength')">Service title
-                                    cannot be less than 5</span>
+                                @if (serviceForm.get('service_title')?.hasError('required')) {
+                                <span>Service title is required</span>
+                                }
+                                @if (serviceForm.get('service_title')?.hasError('minlength')) {
+                                <span>Service title cannot be less than 5</span>
+                                }
                             </div>
                             }
                         </div>
@@ -182,9 +199,9 @@
                                 [class.is-valid]="!serviceForm.get('description')?.errors && serviceForm.get('description')?.touched"></textarea>
                             @if (serviceForm.get('description')?.errors && serviceForm.get('description')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('description')?.hasError('required')">Service description
-                                    is
-                                    required</span>
+                                @if (serviceForm.get('description')?.hasError('required')) {
+                                <span>Service description is required</span>
+                                }
                             </div>
                             }
                         </div>
@@ -202,8 +219,9 @@
                             </select>
                             @if (serviceForm.get('category')?.errors && serviceForm.get('category')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('category')?.hasError('required')">Category is
-                                    required</span>
+                                @if (serviceForm.get('category')?.hasError('required')) {
+                                <span>Category is required</span>
+                                }
                             </div>
                             }
                         </div>
@@ -245,8 +263,9 @@
                                 [class.is-valid]="!serviceForm.get('base_price')?.errors && serviceForm.get('base_price')?.touched">
                             @if (serviceForm.get('base_price')?.errors && serviceForm.get('base_price')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('base_price')?.hasError('required')">Base price is
-                                    required</span>
+                                @if (serviceForm.get('base_price')?.hasError('required')) {
+                                <span>Base price is required</span>
+                                }
                             </div>
                             }
                         </div>
@@ -300,8 +319,9 @@
                             </select>
                             @if (serviceForm.get('currency')?.errors && serviceForm.get('currency')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('currency')?.hasError('required')">Currency is
-                                    required</span>
+                                @if (serviceForm.get('currency')?.hasError('required')) {
+                                <span>Currency is required</span>
+                                }
                             </div>
                             }
                         </div>
@@ -315,9 +335,9 @@
                             @if (serviceForm.get('average_duration')?.errors &&
                             serviceForm.get('average_duration')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('average_duration')?.hasError('required')">Average duration
-                                    is
-                                    required</span>
+                                @if (serviceForm.get('average_duration')?.hasError('required')) {
+                                <span>Average duration is required</span>
+                                }
                             </div>
                             }
                         </div>
@@ -331,8 +351,9 @@
                             <div class="hint muted">Separate keywords with commas to help discovery.</div>
                             @if (serviceForm.get('keywords')?.errors && serviceForm.get('keywords')?.touched){
                             <div class="invalid-feedback">
-                                <span *ngIf="serviceForm.get('keywords')?.hasError('required')">Average duration is
-                                    required</span>
+                                @if (serviceForm.get('keywords')?.hasError('required')) {
+                                <span>Keywords is required</span>
+                                }
                             </div>
                             }
                         </div>

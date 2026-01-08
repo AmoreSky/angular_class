@@ -90,10 +90,12 @@
                 <div class="card recently-joined-card">
                     <h4 class="card-title">Recently Joined</h4>
                     <div class="user-avatars">
-                        <div class="user-avatar" *ngFor="let user of recentlyJoined">
+                        @for (user of recentlyJoined; track user.name) {
+                        <div class="user-avatar">
                             <img [src]="user.avatar" [alt]="user.name">
                             <div class="user-name">{{user.name}}</div>
                         </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -104,7 +106,8 @@
                 <div class="card approvals-card">
                     <h4 class="card-title">Pending Approvals</h4>
                     <div class="approval-list">
-                        <div class="approval-item" *ngFor="let approval of pendingApprovals">
+                        @for (approval of pendingApprovals; track approval.name) {
+                        <div class="approval-item">
                             <div class="approval-user">
                                 <img [src]="approval.avatar" [alt]="approval.name" class="approval-avatar">
                                 <div class="approval-info">
@@ -113,6 +116,7 @@
                                 </div>
                             </div>
                         </div>
+                        }
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@ import { Subcategory } from '../subcategory/subcategory';
 
 @Component({
   selector: 'app-view-service-details',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './view-service-details.html',
   styleUrl: './view-service-details.css',
 })
